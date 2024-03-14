@@ -56,7 +56,7 @@ const CustomerForm = ({ addNewCustomer }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} invalid={isValid}>
+    <Form onSubmit={handleSubmit} invalid={isValid ? "true" : undefined}>
       <input
         type="text"
         //className={`customer-input ${isValid ? "invalid" : ""}`}
