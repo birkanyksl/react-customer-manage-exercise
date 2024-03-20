@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./CustomerForm.css";
-import styled from "styled-components";
+import styles from "./CustomerForm.module.css";
+//import styled from "styled-components";
 
-const Form = styled.form`
+/* const Form = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +28,7 @@ const Form = styled.form`
   & ::placeholder {
     color: ${(props) => (props.invalid ? "white" : "")};
   }
-`;
+`; */
 
 const CustomerForm = ({ addNewCustomer }) => {
   const [customerName, setCustomerName] = useState("");
@@ -41,7 +41,7 @@ const CustomerForm = ({ addNewCustomer }) => {
       return;
     }
     const newCustomer = {
-      id: Math.random(),
+      id: Math.floor(Math.random() * 1000),
       customerName,
     };
     addNewCustomer(newCustomer);
@@ -55,20 +55,22 @@ const CustomerForm = ({ addNewCustomer }) => {
     setCustomerName(e.target.value);
   };
 
+  // invalid={isValid ? "true" : undefined}
   return (
-    <Form onSubmit={handleSubmit} invalid={isValid ? "true" : undefined}>
+    <form className={styles.customerForm} onSubmit={handleSubmit}>
       <input
         type="text"
         //className={`customer-input ${isValid ? "invalid" : ""}`}
+        className={`${styles.customerInput} ${isValid ? styles.invalid : ""}`}
         placeholder="Add a new customer"
         onChange={nameInputChangeHandler}
         value={customerName}
-        //style={{ backgroundColor: isValid ? "red" : "" }}
+        style={{ backgroundColor: isValid ? "red" : "" }}
       />
       <button>
         <i className="bi bi-plus-lg"></i>
       </button>
-    </Form>
+    </form>
   );
 };
 
